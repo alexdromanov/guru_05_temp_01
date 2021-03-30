@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
@@ -39,8 +39,7 @@ public class LambdaTest {
 
         //ищем Issues
         step("Ищем и проверяем Issues", () -> {
-            $(".js-repo-nav").shouldHave(text(findValue));
-            $(".js-repo-nav").$(byText(findValue)).click();
+            $(withText("Issues")).click();
         });
 
 
