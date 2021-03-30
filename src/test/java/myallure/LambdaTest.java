@@ -3,10 +3,12 @@ package myallure;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 public class LambdaTest {
@@ -16,10 +18,10 @@ public class LambdaTest {
         Configuration.startMaximized = true;
     }
 
-    private String  url = "https://github.com/",
-            nameOfRepos = "guru_05_temp_01",
-            userName = "alexdromanov",
-            findText = "Issues";
+    private final String  url = "https://github.com/",
+            repName = "guru_05_temp_01",
+            userName = "alexdromanov/guru_05_temp_01",
+            findValue = "Issues";
     @Test
     void githubTest() {
 
@@ -31,14 +33,14 @@ public class LambdaTest {
         //заходим в репозиторий
         step("Заходим в репозиторий", () -> {
             $(".header-search-input").click();
-            $(".header-search-input").setValue(nameOfRepos).pressEnter();
-            $(".repo-list-item").$(byText(userName)).click();
+            $(".header-search-input").setValue(repName).pressEnter();
+            $(By.linkText(userName)).click();
         });
 
         //ищем Issues
         step("Ищем и проверяем Issues", () -> {
-            $(".js-repo-nav").shouldHave(text(findText));
-            $(".js-repo-nav").$(byText(findText)).click();
+            $(".js-repo-nav").shouldHave(text(findValue));
+            $(".js-repo-nav").$(byText(findValue)).click();
         });
 
 
