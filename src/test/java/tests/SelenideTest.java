@@ -1,4 +1,4 @@
-package myallure;
+package tests;
 
 
 
